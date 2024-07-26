@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.evokedev</groupId>
+        <artifactId>EvokeRobots</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>me.faln</groupId>
+    <artifactId>EvokeRobots</artifactId>
+    <name>EvokeRobots</name>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>io.github.gonalez</groupId>
+            <artifactId>znpcs</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <systemPath>C:/Users/falnu/IdeaProjects/EvokeRobots/libs/znpcs-4.7.jar</systemPath>
+            <scope>system</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.stormdev</groupId>
+            <artifactId>Commons</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <systemPath>C:/Users/falnu/IdeaProjects/EvokeRobots/libs/Commons.jar</systemPath>
+            <scope>system</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.evokedev</groupId>
+            <artifactId>API</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.evokedev</groupId>
+            <artifactId>v1_20</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+</project>

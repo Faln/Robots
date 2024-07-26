@@ -1,0 +1,51 @@
+robot:
+  title: "&8Robot"
+  rows: 3
+  pickup:
+    name: "&aPickup Robot"
+    material: BARRIER
+    lore: []
+    slot: 16
+  upgrades:
+    name: "&aUpgrades"
+    material: BARRIER
+    lore: []
+    slot: 14
+  sell:
+    name: "&aSell: %sell-price%"
+    material: BARRIER
+    lore: []
+    slot: 12
+  borders:
+    "gray":
+      material: "GRAY_STAINED_GLASS_PANE"
+      name: " "
+      lore: [ ]
+      slots:
+        - "0-26"
+robot-upgrade:
+  title: "&8Robot Upgrades"
+  rows: 3
+  speed:
+    name: "&aSpeed Upgrade"
+    material: BARRIER
+    lore:
+      - "&eLevel: &a%current%&8/&c%max%"
+      - "&eSpeed: &f%speed%"
+      - "&eCost: $%cost%"
+    slot: 13
+  storage:
+    name: "&aSpeed Upgrade"
+    material: BARRIER
+    lore:
+      - "&eLevel: &a%current%&8/&c%max%"
+      - "&eSpeed: &f%storage%"
+      - "&eCost: $%cost%"
+    slot: 15
+  borders:
+    "gray":
+      material: "GRAY_STAINED_GLASS_PANE"
+      name: " "
+      lore: [ ]
+      slots:
+        - "0-26"

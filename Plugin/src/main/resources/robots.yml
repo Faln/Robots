@@ -1,0 +1,183 @@
+FARMER:
+  common:
+    npc-name: "&a&lCommon Farmer Robot"
+    item:
+      name: "&a&lCommon Farmer Robot"
+      material: STONE
+      lore:
+        - "&eSpeed: &f%speed%"
+        - "&eStorage: &f%storage%"
+    speed: 15.0 # 1 action per 15s
+    storage: 1000
+    helmet:
+      name: ""
+      material: "LEATHER_HELMET"
+      lore: []
+    chestplate:
+      name: ""
+      material: "LEATHER_CHESTPLATE"
+      lore: [ ]
+    leggings:
+      name: ""
+      material: "LEATHER_LEGGINGS"
+      lore: []
+    boots:
+      name: ""
+      material: "LEATHER_BOOTS"
+      lore: []
+    main-hand:
+      name: ""
+      material: "STONE_SWORD"
+      lore: []
+  rare:
+    npc-name: "&a&lRare Farmer Robot"
+    item:
+      name: "&a&lRare Farmer Robot"
+      material: STONE
+      lore:
+        - "&eSpeed: &f%speed%"
+        - "&eStorage: &f%storage%"
+    speed: 10.0
+    storage: 2000
+    helmet:
+      name: ""
+      material: "LEATHER_HELMET"
+      lore: []
+    chestplate:
+      name: ""
+      material: "LEATHER_CHESTPLATE"
+      lore: [ ]
+    leggings:
+      name: ""
+      material: "LEATHER_LEGGINGS"
+      lore: []
+    boots:
+      name: ""
+      material: "LEATHER_BOOTS"
+      lore: []
+    main-hand:
+      name: ""
+      material: "STONE_SWORD"
+      lore: []
+  epic:
+    npc-name: "&a&lEpic Farmer Robot"
+    item:
+      name: "&a&lEpic Farmer Robot"
+      material: STONE
+      lore:
+        - "&eSpeed: &f%speed%"
+        - "&eStorage: &f%storage%"
+    speed: 5.0
+    storage: 3000
+    helmet:
+      name: ""
+      material: "LEATHER_HELMET"
+      lore: []
+    chestplate:
+      name: ""
+      material: "LEATHER_CHESTPLATE"
+      lore: [ ]
+    leggings:
+      name: ""
+      material: "LEATHER_LEGGINGS"
+      lore: []
+    boots:
+      name: ""
+      material: "LEATHER_BOOTS"
+      lore: []
+    main-hand:
+      name: ""
+      material: "STONE_SWORD"
+      lore: []
+  legendary:
+    npc-name: "&a&lLegendary Farmer Robot"
+    item:
+      name: "&a&lLegendary Farmer Robot"
+      material: STONE
+      lore:
+        - "&eSpeed: &f%speed%"
+        - "&eStorage: &f%storage%"
+    speed: 1.0
+    storage: 4000
+    helmet:
+      name: ""
+      material: "LEATHER_HELMET"
+      lore: []
+    chestplate:
+      name: ""
+      material: "LEATHER_CHESTPLATE"
+      lore: [ ]
+    leggings:
+      name: ""
+      material: "LEATHER_LEGGINGS"
+      lore: []
+    boots:
+      name: ""
+      material: "LEATHER_BOOTS"
+      lore: []
+    main-hand:
+      name: ""
+      material: "STONE_SWORD"
+      lore: []
+MINER:
+  common:
+    npc-name: "&a&lCommon Miner Robot"
+    item:
+      name: "&a&lCommon Miner Robot"
+      material: STONE
+      lore:
+        - "&eSpeed: &f%speed%"
+        - "&eStorage: &f%storage%"
+    speed: 15.0 # 1 action per 15s
+    storage: 1000
+    helmet:
+      name: ""
+      material: "LEATHER_HELMET"
+      lore: []
+    chestplate:
+      name: ""
+      material: "LEATHER_CHESTPLATE"
+      lore: [ ]
+    leggings:
+      name: ""
+      material: "LEATHER_LEGGINGS"
+      lore: []
+    boots:
+      name: ""
+      material: "LEATHER_BOOTS"
+      lore: []
+    main-hand:
+      name: ""
+      material: "STONE_SWORD"
+      lore: []
+SLAYER:
+  common:
+    npc-name: "&a&lCommon Slayer Robot"
+    item:
+      name: "&a&lCommon Slayer Robot"
+      material: STONE
+      lore:
+        - "&eSpeed: &f%speed%"
+        - "&eStorage: &f%storage%"
+    speed: 15.0 # 1 action per 15s
+    storage: 1000
+    helmet:
+      name: ""
+      material: "LEATHER_HELMET"
+      lore: []
+    chestplate:
+      name: ""
+      material: "LEATHER_CHESTPLATE"
+      lore: [ ]
+    leggings:
+      name: ""
+      material: "LEATHER_LEGGINGS"
+      lore: []
+    boots:
+      name: ""
+      material: "LEATHER_BOOTS"
+      lore: []
+    main-hand:
+      name: ""
+      material: "STONE_SWORD"
+      lore: []

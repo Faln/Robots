@@ -1,0 +1,10 @@
+name: EvokeRobots
+version: '1.0-SNAPSHOT'
+main: org.evokedev.evokerobots.EvokeRobots
+api-version: '1.13'
+depend:
+  - Commons
+softdepend:
+  - Citizens
+  - znpcs
+author: "Faln"

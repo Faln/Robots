@@ -1,0 +1,27 @@
+messages:
+  "help":
+    sound:
+      enabled: true
+      value: "ORB_PICKUP"
+      volume: 1
+      pitch: 1
+    message:
+      enabled: true
+      value:
+        - "&3&m-------------------------------------"
+        - " "
+        - "&b&lEvoke&3&lTotems &8&l┃ &bAdmin Help"
+        - "&7&oMade by &f&oEvoke Dev&7&o."
+        - " "
+        - "&7&o<> = Required"
+        - "&7&o[] = Optional"
+        - " "
+        - "&3&lADMIN COMMANDS:"
+        - "&3&l» &b/totem give <player> <totem-type> <multi> <currency> &7(use none for non-evoke-economy currencies)"
+        - "&3&l» &b/totem giverandom <player> <totem-type> <multi-min> <multi-max> <currency> &7(use none for non-evoke-economy currencies)"
+        - "&3&l» &b/totem giveslot <player> <amount>"
+        - " "
+        - "&3&lPLAYER COMMANDS:"
+        - "&3&l» &b/totems"
+        - " "
+        - "&3&m-------------------------------------"
