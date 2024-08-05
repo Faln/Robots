@@ -7,6 +7,7 @@ public final class RobotTickTask extends CommonTask<EvokeRobots> {
 
     public RobotTickTask(final EvokeRobots plugin) {
         super(plugin, 20);
+        this.run();
     }
 
     @Override

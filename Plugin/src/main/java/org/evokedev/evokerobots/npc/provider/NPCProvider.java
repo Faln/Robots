@@ -11,7 +11,9 @@ public interface NPCProvider<N> {
 
     String getProviderName();
 
-    void createNPC(final int npcId, final Location location, final String name, @Nullable final UUID id);
+    void createNPC(final int npcId, final Location location, final String name);
+
+    void setSkin(final int npcId, final String skin);
 
     void dispose(final int npcId);
 
@@ -21,6 +23,7 @@ public interface NPCProvider<N> {
 
     N get(final int npcId);
 
-    void setEquipment(final ItemStack helmet, final ItemStack chest, final ItemStack legs, final ItemStack boots);
-    
+    void setEquipment(final int npcId, final ItemStack[] equipment);
+
+    Location getLocation(final int npcId);
 }

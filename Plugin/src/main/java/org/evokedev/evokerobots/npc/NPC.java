@@ -7,24 +7,27 @@ import org.evokedev.evokerobots.npc.provider.impl.ZNPC;
 
 public final class NPC {
 
+    private static NPCProvider<?> npcProvider;
 
     private NPC() {}
 
-    private static final NPCProvider<?> NPC_PROVIDER;
-
-    static {
-        if (Bukkit.getServer().getPluginManager().isPluginEnabled("ServerNPC")) {
-            NPC_PROVIDER = new ZNPC();
-            Bukkit.getLogger().info("Using ZNPCs as NPC Provider");
+    private static NPCProvider<?> get() {
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("ServersNPC")) {
+            Bukkit.getLogger().info("Using ServersNPC as NPC Provider");
+            return new ZNPC();
         } else if (Bukkit.getServer().getPluginManager().isPluginEnabled("Citizens")) {
-            NPC_PROVIDER = new CitizensNPC();
             Bukkit.getLogger().info("Using Citizens as NPC Provider");
-        } else {
-            throw new IllegalStateException("No NPC Provider found");
+            return new CitizensNPC();
         }
+
+        throw new IllegalStateException("No NPC Provider found");
     }
 
     public static NPCProvider<?> getNpcProvider() {
-        return NPC_PROVIDER;
+        if (npcProvider == null) {
+            npcProvider = get();
+        }
+
+        return npcProvider;
     }
 }

@@ -1,8 +1,10 @@
 package org.evokedev.evokerobots.manager;
 
+import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -30,9 +32,10 @@ public class RobotManager {
 
     private static final String TIER_PLACEHOLDER = "%tier%";
     private static final String SPEED_PLACEHOLDER = "%speed%";
+    private static final String SPEED_LEVEL_PLACEHOLDER = "%speed-level%";
     private static final String STORAGE_PLACEHOLDER = "%storage%";
+    private static final String STORAGE_LEVEL_PLACEHOLDER = "%storage-level%";
     private static final String TYPE_PLACEHOLDER = "%type%";
-    private static final String ROBOT_NAME = "%tier% %type% Robot";
 
     private final EvokeRobots plugin;
 
@@ -54,12 +57,14 @@ public class RobotManager {
         ItemStack item = tier.getRobotItem().parse(new PlaceholderReplacer()
                 .addPlaceholder(TIER_PLACEHOLDER, tier.getName())
                 .addPlaceholder(SPEED_PLACEHOLDER, String.valueOf(tier.getSpeed()))
+                .addPlaceholder(SPEED_LEVEL_PLACEHOLDER, "1")
                 .addPlaceholder(STORAGE_PLACEHOLDER, FormatUtils.formatComma(tier.getStorage()))
+                .addPlaceholder(STORAGE_LEVEL_PLACEHOLDER, "1")
                 .addPlaceholder(TYPE_PLACEHOLDER, tier.getType().name())
         );
 
         item = NBTEditor.set(item, true, RobotUtils.ROBOT_NBT);
-        item = NBTEditor.set(item, tier, RobotUtils.ROBOT_TIER);
+        item = NBTEditor.set(item, tier.getName(), RobotUtils.ROBOT_TIER);
         item = NBTEditor.set(item, tier.getSpeed(), RobotUtils.ROBOT_SPEED);
         item = NBTEditor.set(item, tier.getStorage(), RobotUtils.ROBOT_STORAGE);
         item = NBTEditor.set(item, tier.getType().name(), RobotUtils.ROBOT_TYPE);
@@ -75,16 +80,18 @@ public class RobotManager {
         val storage = storageUpgrade.getLevels().get(robot.getUpgrade(RobotUpgradeType.STORAGE));
 
         ItemStack item = tier.getRobotItem().parse(new PlaceholderReplacer()
-                .addPlaceholder(TIER_PLACEHOLDER, robot.getTier())
+                .addPlaceholder(TIER_PLACEHOLDER, tier.getDisplay())
                 .addPlaceholder(SPEED_PLACEHOLDER, String.valueOf(speed.getValue()))
+                .addPlaceholder(SPEED_LEVEL_PLACEHOLDER, String.valueOf(speed.getLevel()))
                 .addPlaceholder(STORAGE_PLACEHOLDER, FormatUtils.formatComma(storage.getValue()))
+                .addPlaceholder(STORAGE_LEVEL_PLACEHOLDER, FormatUtils.formatComma(storage.getLevel()))
                 .addPlaceholder(TYPE_PLACEHOLDER, robot.getRobotType().getFormattedName())
         );
 
         item = NBTEditor.set(item, true, RobotUtils.ROBOT_NBT);
-        item = NBTEditor.set(item, tier, RobotUtils.ROBOT_TIER);
-        item = NBTEditor.set(item, speed, RobotUtils.ROBOT_SPEED);
-        item = NBTEditor.set(item, storage, RobotUtils.ROBOT_STORAGE);
+        item = NBTEditor.set(item, tier.getName(), RobotUtils.ROBOT_TIER);
+        item = NBTEditor.set(item, speed.getLevel(), RobotUtils.ROBOT_SPEED);
+        item = NBTEditor.set(item, storage.getLevel(), RobotUtils.ROBOT_STORAGE);
         item = NBTEditor.set(item, robot.getRobotType().name(), RobotUtils.ROBOT_TYPE);
 
         return item;
@@ -99,11 +106,15 @@ public class RobotManager {
         NPC.getNpcProvider().createNPC(
                 npcId,
                 location,
-                tier.getDisplay(),
-                player.getUniqueId()
+                tier.getDisplay()
         );
 
+        NPC.getNpcProvider().setEquipment(npcId, tier.getEquipment());
+
         final Robot robot = new Robot(npcId, player.getUniqueId(), location, tierInString, type);
+
+        robot.getUpgrades().put(RobotUpgradeType.SPEED, RobotUtils.getUpgradeLevel(RobotUpgradeType.SPEED, item));
+        robot.getUpgrades().put(RobotUpgradeType.STORAGE, RobotUtils.getUpgradeLevel(RobotUpgradeType.STORAGE, item));
 
         this.plugin.getRobotStorage().save(robot);
     }
@@ -111,6 +122,8 @@ public class RobotManager {
     public void dispose(final Robot robot) {
         NPC.getNpcProvider().dispose(robot.getNpcId());
         robot.getStorage().clear();
+
+        this.plugin.getRobotStorage().remove(robot.getLocation());
     }
 
     public void tickRobots() {
@@ -120,7 +133,7 @@ public class RobotManager {
     }
 
     public void tickRobot(final Robot robot) {
-        if (System.currentTimeMillis() > robot.getNextTick()) {
+        if (System.currentTimeMillis() < robot.getNextTick()) {
             return;
         }
 

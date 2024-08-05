@@ -1,5 +1,6 @@
 package org.evokedev.evokerobots.menu;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.evokedev.evokerobots.EvokeRobots;
 import org.evokedev.evokerobots.impl.Robot;
@@ -40,6 +41,7 @@ public final class RobotMenu extends GenericCommonMenu<EvokeRobots> {
 
         builder.setItem(this.robotManager.getPickupMenuItem().getSlot(), this.robotManager.getPickupMenuItem().getItem().parse(replacer));
         builder.addClickEvent(this.robotManager.getPickupMenuItem().getSlot(), event -> {
+            player.getInventory().addItem(this.robotManager.toItem(robot));
             this.robotManager.dispose(robot);
 
             player.closeInventory();

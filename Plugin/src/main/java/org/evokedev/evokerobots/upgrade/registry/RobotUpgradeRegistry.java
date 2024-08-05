@@ -17,10 +17,10 @@ public final class RobotUpgradeRegistry extends EclipseRegistry<Class<? extends 
     public void load() {
         this.getRegistry().clear();
 
-        final CommonConfig config = this.plugin.getConfig("robots");
+        final CommonConfig config = this.plugin.getConfig("upgrades");
 
         this.register(SpeedRobotUprade.class, SpeedRobotUprade.of(config));
-        this.register(SpeedRobotUprade.class, StorageRobotUpgrade.of(config));
+        this.register(StorageRobotUpgrade.class, StorageRobotUpgrade.of(config));
     }
 
     public <U extends RobotUpgrade<?>> U getUpgrade(final Class<U> clazz) {

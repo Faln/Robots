@@ -21,9 +21,10 @@ public final class TierRegistry extends EclipseRegistry<String, Tier> {
         for (final String key : config.getSectionKeys("")) {
             for (final String s : config.getSectionKeys(key)) {
                 final String path = key + "." + s;
+                final String tier = key.toLowerCase() + "-" + s;
 
-                this.register(key.toLowerCase() + "-" + s, Tier.of(
-                        s,
+                this.register(tier, Tier.of(
+                        tier,
                         RobotType.valueOf(key.toUpperCase()),
                         config.getColoredString(path + ".npc-name"),
                         config.getDouble(path + ".speed"),

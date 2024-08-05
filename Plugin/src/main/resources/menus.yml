@@ -4,18 +4,21 @@ robot:
   pickup:
     name: "&aPickup Robot"
     material: BARRIER
-    lore: []
+    lore:
+      - "&7Click to pickup this robot"
     slot: 16
   upgrades:
     name: "&aUpgrades"
-    material: BARRIER
-    lore: []
-    slot: 14
+    material: CRAFTING_TABLE
+    lore:
+      - "&7Click to view upgrades"
+    slot: 13
   sell:
     name: "&aSell: %sell-price%"
-    material: BARRIER
-    lore: []
-    slot: 12
+    material: EMERALD
+    lore:
+      - "&7Click to sell"
+    slot: 10
   borders:
     "gray":
       material: "GRAY_STAINED_GLASS_PANE"
@@ -23,25 +26,25 @@ robot:
       lore: [ ]
       slots:
         - "0-26"
-robot-upgrade:
+robot-upgrades:
   title: "&8Robot Upgrades"
   rows: 3
   speed:
     name: "&aSpeed Upgrade"
-    material: BARRIER
+    material: SUGAR
     lore:
       - "&eLevel: &a%current%&8/&c%max%"
       - "&eSpeed: &f%speed%"
       - "&eCost: $%cost%"
-    slot: 13
+    slot: 12
   storage:
-    name: "&aSpeed Upgrade"
-    material: BARRIER
+    name: "&aStorage Upgrade"
+    material: CHEST
     lore:
       - "&eLevel: &a%current%&8/&c%max%"
-      - "&eSpeed: &f%storage%"
+      - "&eStorage: &f%storage%"
       - "&eCost: $%cost%"
-    slot: 15
+    slot: 14
   borders:
     "gray":
       material: "GRAY_STAINED_GLASS_PANE"

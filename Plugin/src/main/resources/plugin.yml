@@ -4,7 +4,8 @@ main: org.evokedev.evokerobots.EvokeRobots
 api-version: '1.13'
 depend:
   - Commons
+  - SuperiorSkyblock2
 softdepend:
   - Citizens
-  - znpcs
+  - ServersNPC
 author: "Faln"

@@ -3,6 +3,7 @@ package org.evokedev.evokerobots.utils;
 import lombok.experimental.UtilityClass;
 import org.bukkit.inventory.ItemStack;
 import org.evokedev.evokerobots.type.RobotType;
+import org.evokedev.evokerobots.upgrade.RobotUpgradeType;
 import org.stormdev.utils.NBTEditor;
 
 @UtilityClass
@@ -21,6 +22,17 @@ public class RobotUtils {
 
     public RobotType getType(final ItemStack item) {
         return RobotType.valueOf(NBTEditor.getString(item, ROBOT_TYPE).toUpperCase());
+    }
+
+    public int getUpgradeLevel(final RobotUpgradeType type, final ItemStack item) {
+        switch (type) {
+            case SPEED:
+                return NBTEditor.getInt(item, ROBOT_SPEED);
+            case STORAGE:
+                return NBTEditor.getInt(item, ROBOT_STORAGE);
+            default:
+                throw new IllegalArgumentException("unknown upgrade type");
+        }
     }
 
     public String getTier(final ItemStack item) {

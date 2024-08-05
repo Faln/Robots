@@ -1,9 +1,16 @@
 package org.evokedev.evokerobots.listeners;
 
+import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
+import com.bgsoftware.superiorskyblock.api.events.IslandDisbandEvent;
+import com.bgsoftware.superiorskyblock.api.island.Island;
+import com.bgsoftware.superiorskyblock.api.wrappers.SuperiorPlayer;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
@@ -13,6 +20,8 @@ import org.evokedev.evokerobots.impl.Robot;
 import org.evokedev.evokerobots.menu.RobotMenu;
 import org.evokedev.evokerobots.utils.RobotUtils;
 import org.stormdev.abstracts.CommonListener;
+import org.stormdev.scheduler.Scheduler;
+import org.stormdev.utils.NBTEditor;
 
 public final class RobotListener extends CommonListener<EvokeRobots> {
 
@@ -21,37 +30,40 @@ public final class RobotListener extends CommonListener<EvokeRobots> {
     }
 
     @EventHandler
-    public void onPlace(final PlayerInteractEvent event) {
-        if (event.getItem() == null || event.getItem().getType() == Material.AIR || event.getAction() != Action.RIGHT_CLICK_BLOCK || event.getHand() != EquipmentSlot.HAND) {
+    public void onDisband(final IslandDisbandEvent event) {
+        final Island island = event.getIsland();
+
+        Scheduler.async().run(() -> {
+            this.plugin.getRobotStorage().allValues().removeIf(robot -> {
+                return robot.getOwner().equals(island.getUniqueId());
+            });
+        });
+    }
+
+    @EventHandler
+    public void onPlace(final BlockPlaceEvent event) {
+        if (event.getBlock().getType() == Material.AIR || event.getHand() != EquipmentSlot.HAND) {
             return;
         }
 
-        final ItemStack item = event.getItem();
+        final ItemStack item = event.getItemInHand();
 
-        if (!RobotUtils.isRobot(item) || event.getClickedBlock() == null) {
+        if (!RobotUtils.isRobot(item)) {
             return;
         }
 
         event.setCancelled(true);
-        item.setAmount(item.getAmount() - 1);
 
-        this.plugin.getRobotManager().initRobot(event.getPlayer(), item, event.getClickedBlock().getLocation());
-    }
+        final Player player = event.getPlayer();
+        final Island island = SuperiorSkyblockAPI.getPlayer(player).getIsland();
 
-    @EventHandler
-    public void onClick(final PlayerInteractAtEntityEvent event) {
-        final Location location = event.getRightClicked().getLocation().clone();
-
-        if (!this.plugin.getRobotStorage().contains(location)) {
-            if (!this.plugin.getRobotStorage().contains(location.clone().add(0, 1, 0))) {
-                return;
-            }
-
-            location.add(0, 1, 0);
+        if (island == null) {
+            this.plugin.getMessageCache().sendMessage(player, "messages.island-needed");
+            return;
         }
 
-        final Robot robot = this.plugin.getRobotStorage().get(location);
+        this.plugin.getRobotManager().initRobot(player, item, event.getBlock().getLocation().clone());
 
-        new RobotMenu(this.plugin).open(event.getPlayer(), robot);
+        item.setAmount(item.getAmount() - 1);
     }
 }

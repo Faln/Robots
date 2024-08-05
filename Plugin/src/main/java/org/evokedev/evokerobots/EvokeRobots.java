@@ -1,11 +1,15 @@
 package org.evokedev.evokerobots;
 
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.evokedev.evokerobots.commands.RobotCommand;
 import org.evokedev.evokerobots.commands.subcommands.RobotGiveSubCommand;
+import org.evokedev.evokerobots.commands.subcommands.RobotOpenSubCommand;
 import org.evokedev.evokerobots.impl.Robot;
+import org.evokedev.evokerobots.listeners.CitizensRobotListener;
 import org.evokedev.evokerobots.listeners.RobotListener;
+import org.evokedev.evokerobots.listeners.ZNPCRobotListener;
 import org.evokedev.evokerobots.manager.RobotManager;
 import org.evokedev.evokerobots.storage.RobotJsonStorage;
 import org.evokedev.evokerobots.storage.RobotSQLStorage;
@@ -27,11 +31,10 @@ public final class EvokeRobots extends CommonPlugin<EvokeRobots> {
 
     private final RobotManager robotManager = new RobotManager(this);
 
-    private final RobotTickTask robotTickTask = new RobotTickTask(this);
-
     private final RobotCommand robotCommand = new RobotCommand(this);
 
     private CommonStorageImpl<Location, Robot> robotStorage;
+    private RobotTickTask robotTickTask;
 
     @Override
     public void onEnable() {
@@ -48,12 +51,21 @@ public final class EvokeRobots extends CommonPlugin<EvokeRobots> {
         this.robotUpgradeRegistry.load();
         this.robotManager.load();
 
-        this.robotTickTask.run();
+        this.robotTickTask = new RobotTickTask(this);
 
         this.robotCommand.register();
         this.robotCommand.register(
-                new RobotGiveSubCommand(this)
+                new RobotGiveSubCommand(this),
+                new RobotOpenSubCommand(this)
         );
+
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("ServersNPC")) {
+            new ZNPCRobotListener(this);
+        }
+
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("Citizens")) {
+            new CitizensRobotListener(this);
+        }
 
         new RobotListener(this);
     }
