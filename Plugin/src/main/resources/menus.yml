@@ -14,7 +14,7 @@ robot:
       - "&7Click to view upgrades"
     slot: 13
   sell:
-    name: "&aSell: %sell-price%"
+    name: "&aSell: %sell-price% &7(%item-count%)"
     material: EMERALD
     lore:
       - "&7Click to sell"

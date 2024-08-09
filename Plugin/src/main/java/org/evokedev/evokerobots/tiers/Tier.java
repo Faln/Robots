@@ -22,14 +22,16 @@ public final class Tier {
             final String display,
             final double speed,
             final double storage,
+            final int radius,
             final ItemBuilder robotItem,
             final ItemStack[] equipment
     ) {
         Objects.requireNonNull(name, "Tier must have a identifier");
         Objects.requireNonNull(display, "Tier must have a display");
         Preconditions.checkArgument(speed > 0.0, "Cannot have a interval <= 0");
+        Preconditions.checkArgument(radius > 0);
 
-        return new Tier(name, type, display, speed, storage, robotItem, equipment);
+        return new Tier(name, type, display, speed, storage, radius, robotItem, equipment);
     }
 
     @NonNull
@@ -39,6 +41,7 @@ public final class Tier {
     private final String display;
     private final double speed;
     private final double storage;
+    private final int radius;
     private final ItemBuilder robotItem;
     private final ItemStack[] equipment;
 

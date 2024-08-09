@@ -113,6 +113,8 @@ public class RobotManager {
 
         final Robot robot = new Robot(npcId, player.getUniqueId(), location, tierInString, type);
 
+        robot.getUpgrades().putIfAbsent(RobotUpgradeType.SPEED, 1);
+        robot.getUpgrades().putIfAbsent(RobotUpgradeType.STORAGE, 1);
         robot.getUpgrades().put(RobotUpgradeType.SPEED, RobotUtils.getUpgradeLevel(RobotUpgradeType.SPEED, item));
         robot.getUpgrades().put(RobotUpgradeType.STORAGE, RobotUtils.getUpgradeLevel(RobotUpgradeType.STORAGE, item));
 
@@ -137,14 +139,14 @@ public class RobotManager {
             return;
         }
 
-        if (this.isStorageFull(robot)) {
+        val tier = this.plugin.getTierRegistry().getRegistry().get(robot.getTier());
+        val drops = robot.getRobotType().getFunction().apply(robot.getLocation(), tier);
+        val storageUpgrade = this.plugin.getRobotUpgradeRegistry().getUpgrade(StorageRobotUpgrade.class);
+        val max = tier.getStorage() * storageUpgrade.getLevels().get(robot.getUpgrade(RobotUpgradeType.STORAGE)).getValue();
+
+        if (robot.getItemCount() >= max) {
             return;
         }
-
-        val drops = robot.getRobotType().getFunction().apply(robot.getLocation());
-        val storageUpgrade = this.plugin.getRobotUpgradeRegistry().getUpgrade(StorageRobotUpgrade.class);
-        val tier = this.plugin.getTierRegistry().getRegistry().get(robot.getTier());
-        val max = tier.getStorage() * storageUpgrade.getLevels().get(robot.getUpgrade(RobotUpgradeType.STORAGE)).getValue();
 
         for (val drop : drops.entrySet()) {
             if (robot.getItemCount() >= max) {
@@ -155,8 +157,9 @@ public class RobotManager {
                 break;
             }
 
-            robot.getStorage().putAll(drops);
-            robot.setItemCount(robot.getStorage().values().stream().mapToInt(Integer::intValue).sum());
+            robot.getStorage().putIfAbsent(drop.getKey(), 0);
+            robot.getStorage().put(drop.getKey(), robot.getStorage().get(drop.getKey()) + drop.getValue());
+            robot.setItemCount(robot.getItemCount() + drop.getValue());
         }
 
         val upgrade = this.plugin.getRobotUpgradeRegistry().getUpgrade(SpeedRobotUprade.class);
@@ -165,14 +168,5 @@ public class RobotManager {
         robot.setNextTick((long) (System.currentTimeMillis() + speed * 1000));
 
         NPC.getNpcProvider().playSwingAnimation(robot.getNpcId());
-    }
-
-    public boolean isStorageFull(final Robot robot) {
-        val upgrade = this.plugin.getRobotUpgradeRegistry().getUpgrade(StorageRobotUpgrade.class);
-
-        return robot.getItemCount() >= upgrade.getLevels()
-                .get(robot.getUpgrades()
-                .get(RobotUpgradeType.STORAGE))
-                .getValue();
     }
 }

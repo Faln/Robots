@@ -29,6 +29,7 @@ public final class TierRegistry extends EclipseRegistry<String, Tier> {
                         config.getColoredString(path + ".npc-name"),
                         config.getDouble(path + ".speed"),
                         config.getDouble(path + ".storage"),
+                        config.getInt(path + ".radius"),
                         config.getItemBuilder(path + ".item"),
                         this.readEquipment(config, path))
                 );

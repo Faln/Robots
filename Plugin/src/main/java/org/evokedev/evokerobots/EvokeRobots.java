@@ -11,6 +11,8 @@ import org.evokedev.evokerobots.listeners.CitizensRobotListener;
 import org.evokedev.evokerobots.listeners.RobotListener;
 import org.evokedev.evokerobots.listeners.ZNPCRobotListener;
 import org.evokedev.evokerobots.manager.RobotManager;
+import org.evokedev.evokerobots.npc.EntityIdHandler;
+import org.evokedev.evokerobots.npc.NPC;
 import org.evokedev.evokerobots.storage.RobotJsonStorage;
 import org.evokedev.evokerobots.storage.RobotSQLStorage;
 import org.evokedev.evokerobots.tasks.RobotTickTask;
@@ -46,6 +48,10 @@ public final class EvokeRobots extends CommonPlugin<EvokeRobots> {
             case JSON:
                 this.robotStorage = new CommonStorageImpl<>(new RobotJsonStorage(this));
         }
+
+        /*for (final Robot robot : this.robotStorage.allValues()) {
+            robot.setNpcId(EntityIdHandler.getInstance().getNewId());
+        }*/
 
         this.tierRegistry.load();
         this.robotUpgradeRegistry.load();

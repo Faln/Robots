@@ -37,11 +37,10 @@ public final class RobotUpgradeMenu extends GenericCommonMenu<EvokeRobots> {
 
         builder.setItem(speedItem.getSlot(), speedItem.getItem().parse(new PlaceholderReplacer()
                 .addPlaceholder("%current%", String.valueOf(robot.getUpgrade(RobotUpgradeType.SPEED)))
-                .addPlaceholder("%max%", String.valueOf(speedUpgrade.getLevels().values().stream()
-                        .map(RobotUpgrade.UpgradeDTO::getValue)
-                        .mapToDouble(Double::doubleValue)
+                .addPlaceholder("%max%", String.valueOf(speedUpgrade.getLevels().keySet().stream()
+                        .mapToInt(Integer::intValue)
                         .max()
-                        .getAsDouble()))
+                        .getAsInt()))
                 .addPlaceholder("%speed%", String.valueOf(speed.getValue()))
                 .addPlaceholder("%cost%", speed.getCost() == 0.0 ? "Maxed" : FormatUtils.formatComma(speed.getCost()))
         ));

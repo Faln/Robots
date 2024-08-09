@@ -9,6 +9,7 @@ FARMER:
         - "&eStorage: &f%storage%"
     speed: 15.0 # 1 action per 15s
     storage: 1000
+    radius: 4
     helmet:
       name: ""
       material: "LEATHER_HELMET"
@@ -27,7 +28,7 @@ FARMER:
       lore: []
     main-hand:
       name: ""
-      material: "STONE_SWORD"
+      material: "STONE_HOE"
       lore: []
   rare:
     npc-name: "&a&lRare Farmer Robot"
@@ -39,6 +40,7 @@ FARMER:
         - "&eStorage: &f%storage%"
     speed: 10.0
     storage: 2000
+    radius: 6
     helmet:
       name: ""
       material: "LEATHER_HELMET"
@@ -57,7 +59,7 @@ FARMER:
       lore: []
     main-hand:
       name: ""
-      material: "STONE_SWORD"
+      material: "STONE_HOE"
       lore: []
   epic:
     npc-name: "&a&lEpic Farmer Robot"
@@ -69,6 +71,7 @@ FARMER:
         - "&eStorage: &f%storage%"
     speed: 5.0
     storage: 3000
+    radius: 8
     helmet:
       name: ""
       material: "LEATHER_HELMET"
@@ -87,7 +90,7 @@ FARMER:
       lore: []
     main-hand:
       name: ""
-      material: "STONE_SWORD"
+      material: "STONE_HOE"
       lore: []
   legendary:
     npc-name: "&a&lLegendary Farmer Robot"
@@ -99,6 +102,7 @@ FARMER:
         - "&eStorage: &f%storage%"
     speed: 1.0
     storage: 4000
+    radius: 10
     helmet:
       name: ""
       material: "LEATHER_HELMET"
@@ -117,7 +121,7 @@ FARMER:
       lore: []
     main-hand:
       name: ""
-      material: "STONE_SWORD"
+      material: "STONE_HOE"
       lore: []
 MINER:
   common:
@@ -130,6 +134,7 @@ MINER:
         - "&eStorage: &f%storage%"
     speed: 15.0 # 1 action per 15s
     storage: 1000
+    radius: 4
     helmet:
       name: ""
       material: "LEATHER_HELMET"
@@ -148,7 +153,7 @@ MINER:
       lore: []
     main-hand:
       name: ""
-      material: "STONE_SWORD"
+      material: "STONE_PICKAXE"
       lore: []
 SLAYER:
   common:
@@ -161,6 +166,7 @@ SLAYER:
         - "&eStorage: &f%storage%"
     speed: 15.0 # 1 action per 15s
     storage: 1000
+    radius: 4
     helmet:
       name: ""
       material: "LEATHER_HELMET"

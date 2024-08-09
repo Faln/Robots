@@ -32,6 +32,7 @@ public final class RobotMenu extends GenericCommonMenu<EvokeRobots> {
         final StorageRobotUpgrade storageUpgrade = this.plugin.getRobotUpgradeRegistry().getUpgrade(StorageRobotUpgrade.class);
 
         final PlaceholderReplacer replacer = new PlaceholderReplacer()
+                .add("%radius%", String.valueOf(tier.getRadius()))
                 .add("%speed%", String.valueOf(tier.getSpeed()))
                 .add("%storage%", FormatUtils.formatComma(tier.getStorage()))
                 .add("%speed-after-upgrade%", String.valueOf(tier.getSpeed() / speedUpgrade.getLevels().get(robot.getUpgrade(RobotUpgradeType.SPEED)).getValue()))
