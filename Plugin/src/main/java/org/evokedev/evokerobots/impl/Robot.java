@@ -1,10 +1,11 @@
 package org.evokedev.evokerobots.impl;
 
 import lombok.*;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.eclipse.collections.api.factory.Maps;
-import org.evokedev.evokerobots.price.PriceHandler;
+import org.evokedev.api.PriceService;
 import org.evokedev.evokerobots.type.RobotType;
 import org.evokedev.evokerobots.upgrade.RobotUpgradeType;
 import org.stormdev.storage.id.Id;
@@ -48,8 +49,14 @@ public final class Robot {
     public double getSellPrice() {
         double sum = 0;
 
+        final PriceService service = Bukkit.getServicesManager().load(PriceService.class);
+
+        if (service == null) {
+            return sum;
+        }
+
         for (var entry : this.storage.entrySet()) {
-            sum += PriceHandler.getInstance().getSellPrice(entry.getKey(), entry.getValue());
+            sum += service.getSellPrice(entry.getKey(), entry.getValue());
         }
 
         return sum;

@@ -1,18 +1,16 @@
 package org.evokedev.evokerobots.manager;
 
-import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.evokedev.api.NPCService;
 import org.evokedev.evokerobots.EvokeRobots;
 import org.evokedev.evokerobots.impl.Robot;
 import org.evokedev.evokerobots.npc.EntityIdHandler;
-import org.evokedev.evokerobots.npc.NPC;
 import org.evokedev.evokerobots.tiers.Tier;
 import org.evokedev.evokerobots.type.RobotType;
 import org.evokedev.evokerobots.upgrade.RobotUpgradeType;
@@ -24,7 +22,6 @@ import org.stormdev.chat.PlaceholderReplacer;
 import org.stormdev.files.CommonConfig;
 import org.stormdev.menus.v2.item.MenuItemBuilder;
 import org.stormdev.utils.NBTEditor;
-import org.stormdev.utils.WordUtils;
 
 @RequiredArgsConstructor
 @Getter
@@ -103,13 +100,12 @@ public class RobotManager {
         final RobotType type = RobotUtils.getType(item);
         final int npcId = EntityIdHandler.getInstance().getNewId();
 
-        NPC.getNpcProvider().createNPC(
-                npcId,
-                location,
-                tier.getDisplay()
-        );
+        final NPCService<?> service = this.plugin.getServer().getServicesManager().load(NPCService.class);
 
-        NPC.getNpcProvider().setEquipment(npcId, tier.getEquipment());
+        if (service != null) {
+            service.createNPC(npcId, location, tier.getDisplay());
+            service.setEquipment(npcId, tier.getEquipment());
+        }
 
         final Robot robot = new Robot(npcId, player.getUniqueId(), location, tierInString, type);
 
@@ -122,7 +118,12 @@ public class RobotManager {
     }
 
     public void dispose(final Robot robot) {
-        NPC.getNpcProvider().dispose(robot.getNpcId());
+        final NPCService<?> service = this.plugin.getServer().getServicesManager().load(NPCService.class);
+
+        if (service != null) {
+            service.dispose(robot.getNpcId());
+        }
+
         robot.getStorage().clear();
 
         this.plugin.getRobotStorage().remove(robot.getLocation());
@@ -167,6 +168,10 @@ public class RobotManager {
 
         robot.setNextTick((long) (System.currentTimeMillis() + speed * 1000));
 
-        NPC.getNpcProvider().playSwingAnimation(robot.getNpcId());
+        final NPCService<?> service = this.plugin.getServer().getServicesManager().load(NPCService.class);
+
+        if (service != null) {
+            service.playSwingAnimation(robot.getNpcId());
+        }
     }
 }

@@ -1,13 +1,9 @@
-package org.evokedev.evokerobots.npc.provider;
+package org.evokedev.api;
 
 import org.bukkit.Location;
-import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nullable;
-import java.util.UUID;
-
-public interface NPCProvider<N> {
+public interface NPCService<N> {
 
     String getProviderName();
 

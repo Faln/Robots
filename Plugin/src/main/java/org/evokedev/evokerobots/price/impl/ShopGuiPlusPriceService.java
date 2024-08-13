@@ -1,11 +1,11 @@
-package org.evokedev.evokerobots.price.provider.impl;
+package org.evokedev.evokerobots.price.impl;
 
 import net.brcdev.shopgui.ShopGuiPlusApi;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.evokedev.evokerobots.price.provider.PriceProvider;
+import org.evokedev.api.PriceService;
 
-public final class ShopGuiPlusPriceProvider implements PriceProvider {
+public final class ShopGuiPlusPriceService implements PriceService {
 
     @Override
     public double getSellPrice(final ItemStack item) {

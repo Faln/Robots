@@ -1,9 +1,9 @@
-package org.evokedev.evokerobots.price.provider;
+package org.evokedev.api;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public interface PriceProvider {
+public interface PriceService {
 
     double getSellPrice(final ItemStack item);
 

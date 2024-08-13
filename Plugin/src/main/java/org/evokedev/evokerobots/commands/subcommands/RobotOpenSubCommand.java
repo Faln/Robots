@@ -2,9 +2,9 @@ package org.evokedev.evokerobots.commands.subcommands;
 
 import org.bukkit.entity.Player;
 import org.eclipse.collections.api.factory.Sets;
+import org.evokedev.api.NPCService;
 import org.evokedev.evokerobots.EvokeRobots;
 import org.evokedev.evokerobots.menu.RobotMenu;
-import org.evokedev.evokerobots.npc.NPC;
 import org.stormdev.commands.CommonSubCommand;
 import org.stormdev.commands.context.CommandContext;
 
@@ -24,7 +24,12 @@ public final class RobotOpenSubCommand extends CommonSubCommand<EvokeRobots> {
         }
 
         final int npcId = context.asInt(0);
+        final NPCService<?> service = this.plugin.getServer().getServicesManager().load(NPCService.class);
 
-        new RobotMenu(this.plugin).open(player, this.plugin.getRobotStorage().get(NPC.getNpcProvider().getLocation(npcId)));
+        if (service == null) {
+            throw new IllegalStateException("unknown npc service");
+        }
+
+        new RobotMenu(this.plugin).open(player, this.plugin.getRobotStorage().get(service.getLocation(npcId)));
     }
 }

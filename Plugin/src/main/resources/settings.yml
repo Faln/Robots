@@ -1,3 +1,10 @@
 robot-storage:
   type: JSON
 
+npc-service: "ServersNPC"
+# SHOPGUIPLUS, INTERNAL
+price-service: "SHOPGUIPLUS"
+# vault, any evoke eco
+economy: "vault"
+prices:
+  ROTTEN_FLESH: 10

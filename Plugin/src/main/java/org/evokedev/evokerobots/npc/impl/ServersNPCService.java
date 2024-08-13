@@ -1,21 +1,21 @@
-package org.evokedev.evokerobots.npc.provider.impl;
+package org.evokedev.evokerobots.npc.impl;
 
 import com.github.retrooper.packetevents.PacketEvents;
 import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerEntityAnimation;
 import io.github.gonalez.znpcs.ServersNPC;
 import io.github.gonalez.znpcs.npc.*;
+import io.github.gonalez.znpcs.npc.NPC;
 import io.github.gonalez.znpcs.user.ZUser;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.eclipse.collections.api.factory.Maps;
-import org.evokedev.evokerobots.npc.provider.NPCProvider;
+import org.evokedev.api.NPCService;
 
 import java.util.Map;
-import java.util.UUID;
 
-public final class ZNPC implements NPCProvider<NPC> {
+public final class ServersNPCService implements NPCService<io.github.gonalez.znpcs.npc.NPC> {
 
     @Override
     public String getProviderName() {
@@ -57,7 +57,7 @@ public final class ZNPC implements NPCProvider<NPC> {
     }
 
     @Override
-    public NPC get(final int npcId) {
+    public io.github.gonalez.znpcs.npc.NPC get(final int npcId) {
         return io.github.gonalez.znpcs.npc.NPC.find(npcId);
     }
 

@@ -1,4 +1,4 @@
-package org.evokedev.evokerobots.npc.provider.impl;
+package org.evokedev.evokerobots.npc.impl;
 
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
@@ -11,11 +11,11 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
-import org.evokedev.evokerobots.npc.provider.NPCProvider;
+import org.evokedev.api.NPCService;
 
 import java.util.UUID;
 
-public final class CitizensNPC implements NPCProvider<NPC> {
+public final class CitizensNPCService implements NPCService<NPC> {
 
     @Override
     public String getProviderName() {
